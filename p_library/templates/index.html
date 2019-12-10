@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Библиотека {% endblock %}
+
+{% block content %}
+
+    <h3 class="display-4 text-center my-4">
+        Добро пожаловать в {{ title }}.
+    </h3>
+    <br>
+    <div class="row">
+        Тут собрано {{ books|length }} книг из моей личной коллекции.
+    </div>
+    
+{% endblock %}

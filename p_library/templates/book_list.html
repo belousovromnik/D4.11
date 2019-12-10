@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %} Авторы {% endblock %}
+
+{% block content %}
+    
+    <h3 class="display-4 text-center my-4">Список книг</h3>
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th> Наименование книги </th>
+                        <th> ISBN </th>
+                        <th> Описание </th>
+                        <th> Год издания </th>
+                        <th> Автор </th>
+                        <th> Количество копий </th>
+                        <th> Увеличить количество </th>
+                        <th> Уменьшить количество </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td>
+                                <p>{{ book.title }}</p>
+                            </td>
+                            <td>
+                                <p>{{ book.ISBN }}</p>
+                            </td>
+                            <td>
+                                <p>{{ book.description|truncatewords:10 }}</p>
+                            </td>
+                            <td>
+                                <p>{{ book.year_release }}</p>
+                            </td>
+                            <td>
+                                <p>{{ book.author.full_name }}</p>
+                            </td>
+                            <td>
+                                <p>{{ book.copy_count }}</p>
+                            </td>
+                            <td>
+                                <form action="/index/book_increment/" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{ book.id }}" />
+                                    <input class="btn btn-primary" type="submit" value="Увеличить кол-во" />
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/index/book_decrement/" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{ book.id }}" />
+                                    <input class="btn btn-primary" type="submit" value="Уменьшить кол-во" />
+                                </form>
+                            </td>
+                        </tr>        
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

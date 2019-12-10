@@ -1,0 +1,35 @@
+python manage.py shell
+
+from p_library.models import Author, Book
+
+pushkin = Author.objects.get(full_name="Пушкин Александр Сергеевич")
+pushkin_books = Book.objects.filter(author=pushkin)
+
+pushkin_books.exists()
+
+pushkin_books.count()
+
+for book in pushkin_books:
+    print(book.title)
+
+no_horsman_books = pushkin_books.exclude(title__contains="всадник")
+
+for book in no_horsman_books:
+    print(book.title)
+
+
+
+no_horsman_pushkin_books = Book.objects.all().filter(author=pushkin).exclude(title__icontains="всадник")
+
+for book in no_horsman_pushkin_books:
+    print(book.title)
+
+
+python manage.py dumpdata <APP NAME> --format <FORMAT> -o <OUTPUT FILE>
+
+python manage.py dumpdata p_library --format xml -o data.xml
+
+
+python manage.py loaddata data.xml
+
+
