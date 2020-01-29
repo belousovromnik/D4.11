@@ -14,9 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from p_library import views
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,8 +23,13 @@ urlpatterns = [
     path('index/', views.home),
     path('book/', views.book_list, name='book'),
     path('pubhouse/', views.pubhouse_list, name='pubhouse'),
-    path('author/', views.author_list, name='author'),
     path('index/book_increment/', views.book_increment),
     path('index/book_decrement/', views.book_decrement),
-    
+
+    path('author/', views.author_list, name='author_list'),
+    path('author/create', views.AuthorCreate.as_view(), name='author_create'),  
+    path('author/update/<int:pk>/', views.AuthorEdit.as_view(), name='author_update'),
+    path('author/delete/<int:pk>/', views.AuthorDelete.as_view(), name='author_delete'),
+    path('author/create_many', views.author_create_many, name='author_create_many'), 
+
 ]

@@ -2,34 +2,54 @@
 {% block title %} Авторы {% endblock %}
 
 {% block content %}
-    
-    <h3 class="display-4 text-center my-4">Список авторов книг, которые есть в моей библиотеке</h3>
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th> ФИО автора </th>
-                        <th> Год рождения </th>
-                        <th> Страна </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in objects_list %}
-                        <tr>
-                            <td>
-                                <p>{{ item.full_name }}</p>
-                            </td>
-                            <td>
-                                <p>{{ item.birth_year }}</p>
-                            </td>
-                            <td>
-                                <p>{{ item.country }}</p>
-                            </td>
-                        </tr>        
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+
+<h3 class="display-4 text-center my-4">Список авторов книг, которые есть в моей библиотеке</h3>
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> ФИО автора </th>
+                    <th> Год рождения </th>
+                    <th> Страна </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in objects_list %}
+                <tr>
+                    <td>
+                        <p>{{ item.full_name }}</p>
+                    </td>
+                    <td>
+                        <p>{{ item.birth_year }}</p>
+                    </td>
+                    <td>
+                        <p>{{ item.country }}</p>
+                    </td>
+                    <td>
+                        <a href="{% url 'author_update' pk=item.id %}">
+                            <button type="button" class="btn btn-primary btn-sm">Редактировать</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'author_delete' pk=item.id %}">
+                            <button type="button" class="btn btn-danger btn-sm">Удалить</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <a href="{% url 'author_create' %}">
+            <button type="button" class="btn btn-info btn-sm">Добавить автора</button>
+        </a>
+        <a href="{% url 'author_create_many' %}">
+            <button type="button" class="btn btn-info btn-sm">Добавить несколько авторов</button>
+        </a>
+    </div>
+</div>
 {% endblock %}
