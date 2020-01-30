@@ -33,3 +33,8 @@ python manage.py dumpdata p_library --format xml -o data.xml
 python manage.py loaddata data.xml
 
 
+python manage.py createsuperuser
+
+
+python manage.py makemigrations
+python manage.py migrate

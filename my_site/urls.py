@@ -25,11 +25,9 @@ urlpatterns = [
     path('pubhouse/', views.pubhouse_list, name='pubhouse'),
     path('index/book_increment/', views.book_increment),
     path('index/book_decrement/', views.book_decrement),
+    path('bookreader/', views.BookreaderList, name='bookreader'),
 
-    path('author/', views.author_list, name='author_list'),
-    path('author/create', views.AuthorCreate.as_view(), name='author_create'),  
-    path('author/update/<int:pk>/', views.AuthorEdit.as_view(), name='author_update'),
-    path('author/delete/<int:pk>/', views.AuthorDelete.as_view(), name='author_delete'),
-    path('author/create_many', views.author_create_many, name='author_create_many'), 
+    path('author/', include(('p_library.urls', 'p_library'))),
+    path('reader/', include(('reader.urls', 'reader'))),
 
 ]

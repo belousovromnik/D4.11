@@ -2,9 +2,14 @@
 {% block title %} Авторы - редактирование записи {% endblock %}
 
 {% block content %}
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Сохранить" />
-</form>
+<h1 class="display-4">Редактировать город</h1>
+<div class="row mx-auto">
+  <div class="col-md-4">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Сохранить" class="btn btn-info btn-sm" />
+    </form>
+  </div>
+</div>
 {% endblock %}

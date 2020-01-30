@@ -1,5 +1,5 @@
 from django.db import models  
-  
+from reader.models import Reader
   
 class Author(models.Model):  
     full_name = models.TextField(max_length=100, unique=True, verbose_name='Имя автора')  
@@ -39,8 +39,19 @@ class Book(models.Model):
         verbose_name='Издательство', blank=True, 
         related_name="books", related_query_name="book")
     pubhouse.empty_value_display = '-empty-'
+    readers = models.ManyToManyField(
+            Reader,
+            through='Bookreader',
+            through_fields=('book', 'reader'),
+        )
 
     class Meta:
             verbose_name = 'Книга'
             verbose_name_plural = 'Книги'
             ordering = ['title']
+
+class Bookreader(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    reader = models.ForeignKey(Reader, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=100, unique=True, verbose_name='Комментарий', null = True)  
+    

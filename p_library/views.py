@@ -12,9 +12,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import formset_factory
+from django.db import models
 
-from .models import Book, Author, PubHouse
+from .models import Book, Author, PubHouse, Bookreader
 from .forms import AuthorForm
+
+from reader.models import Reader
 
 def home(request):
     template = loader.get_template('index.html')
@@ -62,6 +65,24 @@ class AuthorDelete(DeleteView):
     model = Author
     # template_name = 'cities/delete.html'
     success_url = reverse_lazy('author_list')
+
+
+def bookreader_list(request):
+    template = loader.get_template('book_list.html')
+    books = Book.objects.all()
+    biblio_data = {
+        "title": "мою библиотеку",
+        "books": books,
+    }
+    return HttpResponse(template.render(biblio_data, request))
+
+class BookreaderList(models.Model):
+    template = loader.get_template('author_list.html')
+    author = Author.objects.all()
+    biblio_data = {
+        "objects_list": author,
+    }
+    return HttpResponse(template.render(biblio_data, request))
 
 
 def author_create_many(request):  

@@ -1,4 +1,7 @@
-{% url 'author_list' as author_url %} {% url 'book' as book_url %}
+{% url 'p_library:author_list' as author_url %}
+{% url 'book' as book_url %}
+{% url 'bookreader' as bookreader_url %}
+{% url 'reader:reader_list' as reader_url %}
 <!-- {% url 'pubhouse' as pubhouse_url %} -->
 
 <!DOCTYPE html>
@@ -26,6 +29,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item {% if request.path == bookreader_url %} active {% endif %}">
+            <a class="nav-link" href="{% url 'bookreader' %}">Выданные книги</a>
+          </li>
+          <li class="nav-item {% if request.path == reader_url %} active {% endif %}">
+            <a class="nav-link" href="{% url 'reader:reader_list' %}">Читатели</a>
+          </li>
           <li class="nav-item {% if request.path == pubhouse_url %} active {% endif %}">
             <a class="nav-link" href="{% url 'pubhouse' %}">Издательства</a>
           </li>
@@ -34,7 +43,8 @@
           </li>
 
           <li class="nav-item {% if request.path == author_url %} active {% endif %}">
-            <a class="nav-link" href="{% url 'author_list' %}">Авторы <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'p_library:author_list' %}">Авторы <span
+                class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>

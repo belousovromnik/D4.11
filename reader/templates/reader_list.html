@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
-{% block title %} Авторы {% endblock %}
+{% block title %} Читатели {% endblock %}
 
 {% block content %}
 
-<h3 class="display-4 text-center my-4">Список авторов книг, которые есть в моей библиотеке</h3>
+<h3 class="display-4 text-center my-4">Список читателей библиотеки</h3>
 <div class="row">
     <div class="col-md-10 mx-auto">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th> ФИО автора </th>
+                    <th> ФИО читателя </th>
                     <th> Год рождения </th>
-                    <th> Страна </th>
+                    <th> Комментарий </th>
                 </tr>
             </thead>
             <tbody>
@@ -24,15 +24,15 @@
                         <p>{{ item.birth_year }}</p>
                     </td>
                     <td>
-                        <p>{{ item.country }}</p>
+                        <p>{{ item.comment }}</p>
                     </td>
                     <td>
-                        <a href="{% url 'p_library:author_update' pk=item.id %}">
+                        <a href="{% url 'reader:reader_update' pk=item.id %}">
                             <button type="button" class="btn btn-primary btn-sm">Редактировать</button>
                         </a>
                     </td>
                     <td>
-                        <a href="{% url 'p_library:author_delete' pk=item.id %}">
+                        <a href="{% url 'reader:reader_delete' pk=item.id %}">
                             <button type="button" class="btn btn-danger btn-sm">Удалить</button>
                         </a>
                     </td>
@@ -44,8 +44,9 @@
 </div>
 <div class="row">
     <div class="col-md-10 mx-auto">
-        <a href="{% url 'p_library:author_create' %}">
-            <button type="button" class="btn btn-info btn-sm">Добавить автора</button>
+        <a href="{% url 'reader:reader_create' %}">
+            <!-- <a href="{% url 'p_library:author_create' %}"> -->
+            <button type="button" class="btn btn-info btn-sm">Добавить читателя</button>
         </a>
     </div>
 </div>
